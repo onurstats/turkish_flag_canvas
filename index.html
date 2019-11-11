@@ -22,7 +22,7 @@
         var range = document.getElementById('flagsize');
         var output = document.getElementById('flaglabel');
         var my_canvas = document.getElementById('canvas')
-
+        TurkishFlag(my_canvas);
         range.oninput = function() {
             output.innerHTML = this.value
             TurkishFlag(my_canvas, this.value);
