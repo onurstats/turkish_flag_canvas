@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Turkish Flag</title>
+
+</head>
+
+<body>
+
+    <div>
+        <input type="range" id="flagsize" name="flagsize" min="0" max="1000" value="500" step="10">
+        <label id="flaglabel" for="flagsize">100</label>
+    </div>
+    <canvas id="canvas">
+        This text is displayed if your browser does not support HTML5 Canvas.
+    </canvas>
+    <script>
+        var range = document.getElementById('flagsize');
+        var output = document.getElementById('flaglabel');
+        var my_canvas = document.getElementById('canvas')
+
+        range.oninput = function() {
+            output.innerHTML = this.value
+            TurkishFlag(my_canvas, this.value);
+        };
+
+        function TurkishFlag(canvas, G = 500) {
+
+            var centerY = G / 2;
+            var A = G / 2;
+            var B = G / 2;
+            var C = G / 16;
+            var D = 0.4 * G;
+            var E = G / 3;
+            var F = G / 4;
+            var L = G * 1.5;
+            canvas.height = G
+            canvas.width = L;
+            ctx = my_canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#E30A17';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Hilal Dış
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(A, centerY, B / 2, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Hilal İç
+            ctx.fillStyle = "#E30A17";
+            ctx.beginPath();
+            ctx.arc(A + C, centerY, D / 2, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            var st = A + C - D / 2 + E
+            ctx.moveTo(st + F / 2, centerY);
+            ctx.fillStyle = "white";
+            for (i = 0; i < 6; i++) {
+                var r = (F / 2);
+                var x = -r * Math.cos(i * 2 * 72 * Math.PI / 180) + st + F / 2;
+                var y = r * Math.sin(i * 2 * 72 * Math.PI / 180) + centerY;
+                ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+        }
+    </script>
+</body>
+
+</html>
